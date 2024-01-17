@@ -1,0 +1,80 @@
+
+@import "./bootstrap-5.3.0/scss/functions";
+@import "./bootstrap-5.3.0/scss/variables";
+@import "./bootstrap-5.3.0/scss/variables-dark";
+@import "./newcolor";
+$all-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans,$grays,$glods);
+$theme-colors: map-merge($theme-colors, $all-colors);
+@import "./bootstrap-5.3.0/scss/maps";
+@import "./bootstrap-5.3.0/scss/mixins";
+@import "./bootstrap-5.3.0/scss/root";
+@import "./bootstrap-5.3.0/scss/utilities";
+@import "./bootstrap-5.3.0/scss/reboot";
+@import "./bootstrap-5.3.0/scss/type";
+@import "./bootstrap-5.3.0/scss/images";
+@import "./bootstrap-5.3.0/scss/containers";
+@import "./bootstrap-5.3.0/scss/grid";
+@import "./bootstrap-5.3.0/scss/helpers";
+@import "./bootstrap-5.3.0/scss/utilities/api";
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          (
+            $all-colors
+          ),
+        ),
+      ),
+    ),
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),(
+        values: map-merge(
+          map-get(map-get($utilities, "background-color"), "values"),
+          (
+            $all-colors
+          ),
+      )
+    )
+  ),
+  "border-color": map-merge(
+      map-get($utilities, "border-color"),(
+        values: map-merge(
+          map-get(map-get($utilities, "border-color"), "values"),
+          (
+            $all-colors
+          ),
+      )
+    )
+  )
+  ));
+  @each $color, $value in $theme-colors {
+    .btn-#{$color} {
+      @if $color == "light" {
+        @include button-variant(
+          $value,
+          $value,
+          $hover-background: shade-color($value, $btn-hover-bg-shade-amount),
+          $hover-border: shade-color($value, $btn-hover-border-shade-amount),
+          $active-background: shade-color($value, $btn-active-bg-shade-amount),
+          $active-border: shade-color($value, $btn-active-border-shade-amount)
+        );
+      } @else if $color == "dark" {
+        @include button-variant(
+          $value,
+          $value,
+          $hover-background: tint-color($value, $btn-hover-bg-tint-amount),
+          $hover-border: tint-color($value, $btn-hover-border-tint-amount),
+          $active-background: tint-color($value, $btn-active-bg-tint-amount),
+          $active-border: tint-color($value, $btn-active-border-tint-amount)
+        );
+      } @else {
+        @include button-variant($value, $value);
+      }
+    }
+  }
+  @import "./bootstrap-5.3.0/scss/utilities/api";
+@import './bootstrap-5.3.0/scss/bootstrap';
