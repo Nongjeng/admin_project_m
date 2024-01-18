@@ -10,3 +10,11 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
+.overlay-img-upload{
+    opacity: 50%;
+    transition: all .5s;
+}
+.overlay-img-upload:hover{
+    opacity: 100%;
+    
+}

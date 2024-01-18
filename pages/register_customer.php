@@ -2,7 +2,7 @@
     <div class=" card w-100 h-100 rounded-0 border-0 rounded-top-5">
         <div class=" card-body">
             <form method="post">
-                <p class=" fs-4 fw-medium m-0 text-center">Register For Employee</p>
+                <p class=" fs-4 fw-medium m-0 text-center">Register For Customer</p>
                 <div class=" d-flex justify-content-center">
                     <label for="upload_image" class=" position-relative">
                         <div style=" width: 130px; height: 130px;"
@@ -47,20 +47,6 @@
                         <option value="2">นาง</option>
                         <option value="2">นางสาว</option>
                     </select>
-                </div>
-                <div class=" hstack gap-3 my-2">
-                    <p class=" fw-medium m-0 text-nowrap">ตรางเรียน/สอน</p>
-                    <input type="file" name="" id="" class=" form-control">
-                </div>
-                <div class=" hstack gap-3 my-2">
-                    <p class=" fw-medium m-0 text-nowrap">ธนาคาร</p>
-                    <input type="text" name="name" id=""
-                        class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
-                </div>
-                <div class=" hstack gap-3 my-2">
-                    <p class=" fw-medium m-0 text-nowrap">เลขบัญชี</p>
-                    <input type="text" name="name" id=""
-                        class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">Username</p>
