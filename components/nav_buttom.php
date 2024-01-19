@@ -18,7 +18,7 @@
                 <span class=" small fw-light text-center" style=" font-size: 15px;">ร้านค้า</span>
             </div>
         </a>
-        <a href="" class=" text-decoration-none text-dark">
+        <a href="?page=basket" class=" text-decoration-none text-dark">
             <div class=" vstack justify-content-center">
                 <img src="./public/img/icon/bag.svg" alt="" style=" width: 30px; height: 30px;" class=" mx-auto">
                 <span class=" small fw-light text-center" style=" font-size: 15px;">ตระกร้า</span>

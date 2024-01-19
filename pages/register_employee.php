@@ -10,16 +10,22 @@
                             <i class="bi bi-camera-fill fs-1"></i>
                         </div>
                         <img src="./public/img/user.jpg" id="uploaded_image" class=" bg-200 rounded-circle"
-                            style=" width: 130px; height: 130px;" />
+                            style=" width: 130px; height: 130px;" name="userimg" />
                         <input type="file" name="image" class="image" id="upload_image" style="display:none" />
                     </label>
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">คำนำหน้า</p>
-                    <select class="form-select shadow-none">
-                        <option value="1">นาย</option>
-                        <option value="2">นาง</option>
-                        <option value="2">นางสาว</option>
+                    <select class="form-select shadow-none" name="prefix">
+                        <?php
+                        $sql_perfix = "SELECT * FROM  prefix ";
+                        $sql_perfix_q = mysqli_query($conn, $sql_perfix);
+                        while ($data = mysqli_fetch_assoc($sql_perfix_q)) {
+                            ?>
+                            <option value="<?=$data['prefix_id']?>"><?=$data['prefix_name']?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class=" hstack gap-3 my-2">
@@ -29,52 +35,64 @@
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">เบอร์โทร</p>
-                    <input type="text" name="name" id=""
+                    <input type="text" name="phone" id=""
                         class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">แผนกวิชา</p>
-                    <select class="form-select shadow-none">
-                        <option value="1">นาย</option>
-                        <option value="2">นาง</option>
-                        <option value="2">นางสาว</option>
+                    <select class="form-select shadow-none" name="department">
+                        <?php
+                        $sql_department = "SELECT * FROM  department ";
+                        $sql_department_q = mysqli_query($conn, $sql_department);
+                        while ($data = mysqli_fetch_assoc($sql_department_q)) {
+                            ?>
+                            <option value="<?=$data['dep_id']?>"><?=$data['dep_name']?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">สถานะ</p>
-                    <select class="form-select shadow-none">
-                        <option value="1">นาย</option>
-                        <option value="2">นาง</option>
-                        <option value="2">นางสาว</option>
+                    <select class="form-select shadow-none" name="statuslevel">
+                        <?php
+                        $sql_statuslevel = "SELECT * FROM  statuslevel ";
+                        $sql_statuslevel_q = mysqli_query($conn, $sql_statuslevel);
+                        while ($data = mysqli_fetch_assoc($sql_statuslevel_q)) {
+                            ?>
+                            <option value="<?=$data['statuslevel_id']?>"><?=$data['statuslevel_name']?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">ตรางเรียน/สอน</p>
-                    <input type="file" name="" id="" class=" form-control">
+                    <input type="file" name="img_table" id="" class=" form-control">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">ธนาคาร</p>
-                    <input type="text" name="name" id=""
+                    <input type="text" name="bank_name" id=""
                         class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">เลขบัญชี</p>
-                    <input type="text" name="name" id=""
+                    <input type="text" name="bank_number" id=""
                         class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">Username</p>
-                    <input type="text" name="name" id=""
+                    <input type="text" name="username" id=""
                         class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">Password</p>
-                    <input type="text" name="name" id=""
+                    <input type="text" name="password" id=""
                         class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" d-flex justify-content-between mt-4">
-                    <a href="" class="btn btn-red-500 rounded-pill px-5">Back</a>
-                    <button class=" btn btn-green-500 rounded-pill px-5">Submit</button>
+                    <a href="?page=login" class="btn btn-red-500 rounded-pill px-5">Back</a>
+                    <button class=" btn btn-green-500 rounded-pill px-5" type="submit" name="register_employee">Submit</button>
                 </div>
             </form>
         </div>
