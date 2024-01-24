@@ -22,6 +22,7 @@ include('./controllers/con_db.php');
 
 <body onload="webload()">
     <?php
+
     if (empty($_GET['page']) || !ctype_alnum(str_replace(['-', '_'], '', $_GET['page'])) || !file_exists("pages/{$_GET['page']}.php")) {
         die(header('Location: ?page=login'));
     }

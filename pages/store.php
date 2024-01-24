@@ -4,7 +4,12 @@
         <p class=" text-center fs-2 my-3">ร้านค้าวิทยาลัยเทคนิคสัตหีบ</p>
         <div class=" h-100 overflow-scroll ">
             <?php
-            $sql_store = "SELECT * FROM shop";
+             $sql_store = "SELECT * FROM shop";
+            if(isset($_SESSION['nowshop'])){
+                $shopid = $_SESSION['nowshop'];
+                $sql_store = "SELECT * FROM shop WHERE shop_id = '$shopid';";
+            }
+           
             $sql_store_q = mysqli_query($conn, $sql_store);
             while ($data = mysqli_fetch_assoc($sql_store_q)) { ?>
                 <div class=" card mx-4 bg-200 border-0 hstack overflow-hidden mb-2">

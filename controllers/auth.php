@@ -2,11 +2,11 @@
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $sql = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
-    $sql_q = mysqli_query($conn, $sql);
-    if (mysqli_fetch_row($sql_q) > 0) {
-        $user = mysqli_fetch_assoc($sql_q);
-        $_SESSION['user'] = $user['username'];
+    $sqla = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
+    $sql_q = mysqli_query($conn, $sqla);
+    $useraa = mysqli_fetch_assoc($sql_q);
+    if (mysqli_num_rows($sql_q) > 0) {
+        $_SESSION['user'] = $useraa['cus_id'];
         header("Location:?page=home");
     } else {
         ?>
