@@ -5,8 +5,9 @@
             <p class=" text-center fs-2 m-0">รายการของฉัน</p>
         </div>
         <div class=" h-100 overflow-scroll ">
+            <?php include('./controllers/basket.php') ?>
             <?php
-            $orderid = isset($_SESSION['ordernumber']);
+            $orderid = empty($_SESSION['ordernumber']) ? null : $_SESSION['ordernumber'];
             $userid = $_SESSION['user'];
             $sql_order_list = "SELECT * 
             FROM `order` 
@@ -22,7 +23,7 @@
                     $produnselect_q = mysqli_query($conn, $produnselect);
                     $produnselect_q_fatch = mysqli_fetch_assoc($produnselect_q)
                         ?>
-                    <?php include('./controllers/basket.php') ?>
+
                     <form method="post">
                         <div class=" card mx-4 bg-200 border-0 hstack overflow-hidden mb-2">
                             <img src="./public/img/food/f1.png" alt="" style="width: 150px;">
@@ -60,7 +61,7 @@
 
         </div>
         <?php
-        $sql_count_sum = "SELECT COUNT(total_price) AS total FROM `order` WHERE order_id='$orderid' ";
+        $sql_count_sum = "SELECT SUM(total_price) AS total FROM `order` WHERE order_id='$orderid' ";
         $sql_count_sum_q = mysqli_query($conn, $sql_count_sum);
         $sql_count_sun_fatch = mysqli_fetch_assoc($sql_count_sum_q)
             ?>
@@ -69,25 +70,37 @@
                 <div class=" fs-4 fw-light vstack lh-1"> ราคารวม<span class=" small"
                         style=" font-size: 12px;">ยังไม่รวมค่าจัดส่ง</span> </div>
                 <div class=" fs-4">฿
-                    <?= $sql_count_sun_fatch['total'] ?>
+                    <?= empty($sql_count_sun_fatch['total']) ? '0' : $sql_count_sun_fatch['total'] ?>
                 </div>
             </div>
-            <button class=" btn btn-green-500 rounded-3 mt-2 w-100" data-bs-toggle="modal" data-bs-target="#distan">
+            <button class=" btn btn-green-500 rounded-3 mt-2 w-100 " data-bs-toggle="modal" data-bs-target="#distan"
+                <?= mysqli_num_rows($sql_order_list_q) > 0 ? null : 'disabled' ?>>
                 ถัดไป
             </button>
             <div class="modal fade" id="distan" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <p class=" fs-5 m-0 ">แผนกที่ต้องการจัดส่ง</p>
-                            <select class="form-select">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <button class=" btn btn-green-500 rounded-3 mt-2 w-100">
-                                ยืนยันที่อยู่จัดส่ง
-                            </button>
+                            <form method="post">
+                                <p class=" fs-5 m-0 ">แผนกที่ต้องการจัดส่ง</p>
+                                <select class="form-select shadow-none" name="distance_price">
+                                    <?php
+                                    $sql_statuslevel = "SELECT * FROM  distance_price ";
+                                    $sql_statuslevel_q = mysqli_query($conn, $sql_statuslevel);
+                                    while ($data = mysqli_fetch_assoc($sql_statuslevel_q)) {
+                                        ?>
+                                        <option value="<?= $data['disprice_id'] ?>">
+                                            <?= $data['disprice_name'] ?> ค่าจัดส่ง
+                                            <?= $data['price'] ?> บาท
+                                        </option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                                <button class=" btn btn-green-500 rounded-3 mt-2 w-100 " name="order_distance" value="<?= $orderid ?>">
+                                    ยืนยันที่อยู่จัดส่ง
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

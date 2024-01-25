@@ -149,3 +149,23 @@ if(isset($_POST['deleteitem'])){
     }
 
 }
+
+if(isset($_POST['order_distance'])){
+    $distance_price = $_POST['distance_price'];
+    $order_distance = $_POST['order_distance'];
+    $sql_distance_update = "UPDATE `order` SET disprice_id='$distance_price' WHERE order_id='$order_distance'";
+    if (mysqli_query($conn, $sql_distance_update)) {
+        header("Location:?page=address_order");
+    } else {
+        ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                timer: 1500,
+                text: 'เกิดข้อผิดพลาดภายในระบบ',
+            })
+        </script>
+        <?php
+    }
+}
