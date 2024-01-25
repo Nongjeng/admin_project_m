@@ -59,6 +59,7 @@
                 }
             </script>
             <p class="mt-3">เลือกวิธีการชำระเงิน</p>
+            <?php include('./controllers/paymet.php') ?>
             <form method="post">
                 <div class=" d-flex flex-column gap-2">
                     <input type="hidden" name="latitude" id="latitude">

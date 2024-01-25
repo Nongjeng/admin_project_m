@@ -16,4 +16,19 @@ if (isset($_POST['transfer_money'])) {
         </script>
         <?php
     }
+    $sql_update_gps = "UPDATE `order` SET latitude='$latitude',londtitude='$longitude',paytype_id='2',paystatus_id='2' WHERE order_id='$orderid'";
+    if (mysqli_query($conn, $sql_update_gps)) {
+        header("Location:?page=paymet");
+    } else {
+        ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                timer: 1500,
+                text: 'เกิดข้อผิดพลาดภายในระบบ',
+            })
+        </script>
+        <?php
+    }
 }
