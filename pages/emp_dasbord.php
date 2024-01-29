@@ -1,3 +1,4 @@
+<?php include('./controllers/employee_auth.php') ?>
 <div class=" d-flex flex-column  vh-100">
     <?php include('./components/nav_top.php') ?>
     <div class=" flex-shrink-1 h-100 overflow-hidden d-flex flex-column">
@@ -14,7 +15,7 @@
                 <img src="./public/img/icon/empds2.png" alt="">
                 <div class=" d-flex flex-column lh-1">
                     <p class="m-0 fs-2 text-end">จำนวนงานที่ได้รับวันนี้</p>
-                    <p class="m-0 fs-2 text-end">00.00 บาท</p>
+                    <p class="m-0 fs-2 text-end">0 ครั้ง</p>
                 </div>
             </div>
             <div class=" p-3 d-flex bg-red-500 w-100 align-items-center justify-content-between">

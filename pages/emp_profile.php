@@ -1,7 +1,9 @@
+<?php include('./controllers/employee_auth.php') ?>
 <div class=" bg-blue-400 vh-100 vw-100 d-flex justify-content-center align-items-center pt-5">
     <div class=" card w-100 h-100 rounded-0 border-0 rounded-top-5">
         <div class=" card-body">
             <form method="post">
+                
                 <div class=" d-flex justify-content-center">
                 <img src="./public/img/user.jpg" id="uploaded_image" class=" bg-200 rounded-circle"
                             style=" width: 130px; height: 130px;" />
@@ -12,10 +14,11 @@
                         
                     </select> -->
                 </div>
-                <div class=" hstack gap-3 my-2">
-                    <p class=" fw-medium m-0 text-nowrap">ชื่อ-นามสกุล</p>
-                    <input type="text" name="name" id=""
-                        class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark" >
+                <div class="hstack gap-3 my-2">
+                    <p class="fw-medium m-0 text-nowrap">ชื่อ-นามสกุล</p>
+                    <input type="text" name="emp_name"
+                        value="<?php echo isset($emp_data['emp_name']) ? $emp_data['emp_name'] : ''; ?>" disabled
+                        class="form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark">
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">เบอร์โทร</p>
