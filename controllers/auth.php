@@ -3,10 +3,15 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $sqla = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
+    $sqlb = "SELECT * FROM employee WHERE username='$username' AND password='$password'";
     $sql_q = mysqli_query($conn, $sqla);
+    $sql_p = mysqli_query($conn, $sqlb);
     $useraa = mysqli_fetch_assoc($sql_q);
     if (mysqli_num_rows($sql_q) > 0) {
         $_SESSION['user'] = $useraa['cus_id'];
+        header("Location:?page=home");
+    } elseif (mysqli_num_rows($sql_p) > 0) {
+        $_SESSION['emp'] = $empa['emp_id'];
         header("Location:?page=home");
     } else {
         ?>
@@ -20,6 +25,7 @@ if (isset($_POST['login'])) {
         </script>
         <?php
     }
+    
 }
 if (isset($_POST['register_customer'])) {
     $perfix = $_POST['perfix'];
@@ -105,8 +111,6 @@ if (isset($_POST['register_customer'])) {
     }
 
 }
-
-
 if (isset($_POST['register_employee'])) {
     $perfix = $_POST['perfix'];
     $name = $_POST['name'];
