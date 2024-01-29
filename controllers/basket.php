@@ -169,3 +169,32 @@ if(isset($_POST['order_distance'])){
         <?php
     }
 }
+
+if(isset($_POST['canelorderid'])){
+    $canelorderid = $_POST['canelorderid'];
+    $comment = $_POST['comment'];
+    $sql_cal_order = "UPDATE orderstatus_id SET orderstatus_id = '9', detail= '$comment' WHERE order_id ='$canelorderid'";
+    if (mysqli_query($conn, $sql_cal_order)) {
+        ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                timer: 1500,
+                text: 'ระบบทำการยกเลิก แล้ว',
+            })
+        </script>
+        <?php
+    } else {
+        ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                timer: 1500,
+                text: 'เกิดข้อผิดพลาดภายในระบบ',
+            })
+        </script>
+        <?php
+    }
+}
