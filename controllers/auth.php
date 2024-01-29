@@ -2,17 +2,18 @@
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $sqla = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
-    $sqlb = "SELECT * FROM employee WHERE username='$username' AND password='$password'";
-    $sql_q = mysqli_query($conn, $sqla);
-    $sql_p = mysqli_query($conn, $sqlb);
-    $useraa = mysqli_fetch_assoc($sql_q);
-    if (mysqli_num_rows($sql_q) > 0) {
-        $_SESSION['user'] = $useraa['cus_id'];
-        header("Location:?page=home");
-    } elseif (mysqli_num_rows($sql_p) > 0) {
-        $_SESSION['emp'] = $empa['emp_id'];
-        header("Location:?page=home");
+    $sqluser = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
+    $sqlemp = "SELECT * FROM employee WHERE username='$username' AND password='$password'";
+    $sql_user = mysqli_query($conn, $sqluser);
+    $sql_emp = mysqli_query($conn, $sqlemp);
+    $user_data = mysqli_fetch_assoc($sql_user);
+    $emp_data = mysqli_fetch_assoc($sql_emp);
+    if ($user_data) {
+        $_SESSION['user'] = $user_data['cus_id'];
+        header("Location:?page=home&id=" . $user_data['cus_id']);
+    } elseif ($emp_data) {
+        $_SESSION['emp'] = $emp_data['emp_id'];
+        header("Location:?page=emp_dasbord&id=" . $emp_data['emp_id']);
     } else {
         ?>
         <script>
@@ -25,7 +26,6 @@ if (isset($_POST['login'])) {
         </script>
         <?php
     }
-    
 }
 if (isset($_POST['register_customer'])) {
     $perfix = $_POST['perfix'];

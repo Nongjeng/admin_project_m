@@ -1,3 +1,18 @@
+<?php
+if (isset($_SESSION['emp'])) {
+    $emp_id = $_SESSION['emp'];
+    $sql_fetch_employee = "SELECT * FROM employee WHERE emp_id = $emp_id";
+    $result = mysqli_query($conn, $sql_fetch_employee);
+    if ($result) {
+        $emp_data = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+    } else {
+        echo "เกิดข้อผิดพลาดในการดึงข้อมูลพนักงาน";
+    }
+} else {
+    echo "กรุณา login เพื่อเข้าถึงหน้านี้";
+}
+?>
 <div class=" d-flex flex-column  vh-100">
     <?php include('./components/nav_top.php') ?>
     <div class=" flex-shrink-1 h-100 overflow-hidden d-flex flex-column">
@@ -14,7 +29,7 @@
                 <img src="./public/img/icon/empds2.png" alt="">
                 <div class=" d-flex flex-column lh-1">
                     <p class="m-0 fs-2 text-end">จำนวนงานที่ได้รับวันนี้</p>
-                    <p class="m-0 fs-2 text-end">00.00 บาท</p>
+                    <p class="m-0 fs-2 text-end">0 ครั้ง</p>
                 </div>
             </div>
             <div class=" p-3 d-flex bg-red-500 w-100 align-items-center justify-content-between">
