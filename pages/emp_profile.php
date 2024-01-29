@@ -1,19 +1,4 @@
-<?php
-if (isset($_SESSION['emp'])) {
-    $emp_id = $_SESSION['emp'];
-    $sql_fetch_employee = "SELECT * FROM employee WHERE emp_id = $emp_id";
-    $result = mysqli_query($conn, $sql_fetch_employee);
-    if ($result) {
-        $emp_data = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
-    } else {
-        echo "เกิดข้อผิดพลาดในการดึงข้อมูลพนักงาน";
-    }
-} else {
-    echo "กรุณา login เพื่อเข้าถึงหน้านี้";
-}
-?>
-
+<?php include('./controllers/employee_auth.php') ?>
 <div class=" bg-blue-400 vh-100 vw-100 d-flex justify-content-center align-items-center pt-5">
     <div class=" card w-100 h-100 rounded-0 border-0 rounded-top-5">
         <div class=" card-body">
