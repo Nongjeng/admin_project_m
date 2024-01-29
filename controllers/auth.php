@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
         header("Location:?page=home");
     } elseif (mysqli_num_rows($sql_p) > 0) {
         $_SESSION['emp'] = $empa['emp_id'];
-        header("Location:?page=home");
+        header("Location:?page=emp_dasbord");
     } else {
         ?>
         <script>

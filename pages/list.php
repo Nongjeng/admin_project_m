@@ -10,11 +10,22 @@
             <p class=" text-start fs-6 m-0">รายการล่าสุด</p>
         </div>
         <div class=" h-100 overflow-scroll ">
+            <?php
+            $userid = $_SESSION['user'];
+            $sql_list_order = "SELECT `order`.order_id, `order`.cus_id, orderstatus_id
+            FROM `orderstatus_detail`
+            INNER JOIN `order` ON orderstatus_detail.order_id = `order`.order_id
+            WHERE orderstatus_id BETWEEN 1 AND 3 AND cus_id = '2'
+            GROUP BY `order`.order_id
+            LIMIT 0, 25;";
+            $sql_list_order_q = mysqli_query($conn, $sql_list_order);
+            $sql_list_order_fatch = mysqli_fetch_assoc($sql_list_order_q);
+            ?>
             <div class=" card mx-4 bg-200 border-0 mb-2">
                 <div class=" card-body d-flex justify-content-between align-items-center">
                     <div class=" vstack text-center">
                         <p class=" fs-5 m-0">รหัสการสั่งซื้อ</p>
-                        <span class=" fs-4 fw-light">001</span>
+                        <span class=" fs-4 fw-light">#<?= $sql_list_order_fatch['order_id'] ?></span>
                     </div>
                     <div>
                         <button class=" btn btn-yellow-500" data-bs-toggle="modal"
@@ -23,12 +34,12 @@
                             <div class="modal-dialog modal-dialog-centered rounded-0">
                                 <div class="modal-content rounded-0">
                                     <div class="modal-header bg-700 rounded-0 p-0 p-2">
-                                        <p class="modal-title m-0 fs-5 text-white">รหัสการสั่งซื้อ 001 </p>
+                                        <p class="modal-title m-0 fs-5 text-white">รหัสการสั่งซื้อ #<?= $sql_list_order_fatch['order_id'] ?> </p>
                                     </div>
                                     <div class="">
                                         <div class=" shadow-sm p-3 d-flex justify-content-center ">
                                             <div class=" d-flex flex-column justify-content-center">
-                                                <div class="mx-auto bg-yellow-500 fs-4 rounded-circle d-flex justify-content-center align-items-center"
+                                                <div class="mx-auto <?= $sql_list_order_fatch['orderstatus_id'] == 1 || $sql_list_order_fatch['orderstatus_id'] == 2 || $sql_list_order_fatch['orderstatus_id'] == 3 ? 'bg-yellow-500':'bg-500' ?> fs-4 rounded-circle d-flex justify-content-center align-items-center"
                                                     style=" width: 50px; height: 50px;">
                                                     1
                                                 </div>
@@ -36,7 +47,7 @@
                                             </div>
                                             <hr class=" border-2 w-100 mt-4">
                                             <div class=" d-flex flex-column justify-content-center">
-                                                <div class="mx-auto bg-500 fs-4 rounded-circle d-flex justify-content-center align-items-center"
+                                                <div class="mx-auto <?= $sql_list_order_fatch['orderstatus_id'] == 1 || $sql_list_order_fatch['orderstatus_id'] == 2 ? 'bg-yellow-500':'bg-500' ?> fs-4 rounded-circle d-flex justify-content-center align-items-center"
                                                     style=" width: 50px; height: 50px;">
                                                     2
                                                 </div>
@@ -44,7 +55,7 @@
                                             </div>
                                             <hr class=" border-2 w-100 mt-4">
                                             <div class=" d-flex flex-column justify-content-center">
-                                                <div class="mx-auto bg-500 fs-4 rounded-circle d-flex justify-content-center align-items-center"
+                                                <div class="mx-auto <?= $sql_list_order_fatch['orderstatus_id'] == 3   ? 'bg-yellow-500':'bg-500' ?> fs-4 rounded-circle d-flex justify-content-center align-items-center"
                                                     style=" width: 50px; height: 50px;">
                                                     3
                                                 </div>
@@ -52,6 +63,11 @@
                                             </div>
                                         </div>
                                         <div class="p-3">
+                                            <?php
+                                            $orderid = $sql_list_order_fatch['order_id'];
+                                            $sql_order = "SELECT * FROM `order` WHERE order_id= '$orderid' ";
+                                            
+                                            ?>
                                             <table class=" table">
                                                 <thead>
                                                     <tr>
