@@ -9,7 +9,7 @@
                 <p class=" fs-5 ">สิ้นสุดวันที่</p>
                 <input type="date" name="" id="" class=" form-control">
                 <div class=" d-flex justify-content-end mt-3 ">
-                    <button class=" btn btn-yellow-400 ">ดูยอดรายได้</button>
+                    <button class=" btn btn-yellow-400 ">ดูจำนวนงาน</button>
                 </div>
             </div>
         </div>
