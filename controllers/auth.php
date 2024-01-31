@@ -19,9 +19,9 @@ if (isset($_POST['login'])) {
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'ข้อผิดพลาด',
                 timer: 1500,
-                text: 'รหัสผ่านไม่ถูกต้อง',
+                text: 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง',
             })
         </script>
         <?php
@@ -41,7 +41,7 @@ if (isset($_POST['register_customer'])) {
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'ข้อผิดพลาด',
                 timer: 1500,
                 text: 'มีผู้ใช้งานนี้ในระบบแล้ว',
             })
@@ -71,7 +71,7 @@ if (isset($_POST['register_customer'])) {
                 <script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'ข้อผิดพลาด',
                         timer: 1500,
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
@@ -98,7 +98,7 @@ if (isset($_POST['register_customer'])) {
                 <script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'ข้อผิดพลาด',
                         timer: 1500,
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
@@ -126,7 +126,7 @@ if (isset($_POST['register_employee'])) {
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'ข้อผิดพลาด',
                 timer: 1500,
                 text: 'โปรดทำการอัพโหลดตรางเรียน / ตรางสอน',
             })
@@ -139,7 +139,7 @@ if (isset($_POST['register_employee'])) {
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'ข้อผิดพลาด',
                 timer: 1500,
                 text: 'มีผู้ใช้งานนี้ในระบบแล้ว',
             })
@@ -170,7 +170,7 @@ if (isset($_POST['register_employee'])) {
                 <script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'ข้อผิดพลาด',
                         timer: 1500,
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
@@ -197,7 +197,7 @@ if (isset($_POST['register_employee'])) {
                 <script>
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'ข้อผิดพลาด',
                         timer: 1500,
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })

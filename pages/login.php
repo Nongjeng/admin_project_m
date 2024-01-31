@@ -9,12 +9,12 @@
                 <form class=" px-3" method="post">
                     <div class="mb-3">
                         <p class=" fs-5 fw-medium m-0 rounded-0 shadow-none">Username</p>
-                        <input type="text" name="username" id=""
+                        <input type="text" name="username" id="" placeholder="ชื่อผู้ใช้งาน"
                             class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark" required>
                     </div>
                     <div class="">
                         <p class=" fs-5 fw-medium m-0 rounded-0 shadow-none">Password</p>
-                        <input type="password" name="password" id=""
+                        <input type="password" name="password" id="" placeholder="รหัสผ่าน"
                             class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark" required>
                     </div>
                     <div class=" d-flex justify-content-center mt-5">
