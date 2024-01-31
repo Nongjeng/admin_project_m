@@ -8,14 +8,36 @@
                 <img src="./public/img/icon/empds1.png" alt="">
                 <div class=" d-flex flex-column lh-1">
                     <p class="m-0 fs-2 text-end">รายได้วันนี้</p>
-                    <p class="m-0 fs-2 text-end">00.00 บาท</p>
+                    <?php
+                    $empid = $_SESSION['emp'];
+                    $sql_income_day ="SELECT SUM(price) AS price
+                    FROM `order`
+                    INNER JOIN distance_price ON `order`.disprice_id = distance_price.disprice_id
+                    WHERE STR_TO_DATE(order_date, '%d/%m/%Y') = CURDATE() AND emp_id = '$empid'
+                    LIMIT 0, 25;" ;
+                    $sql_income_day_q = mysqli_query($conn,$sql_income_day);
+                    $price = mysqli_fetch_assoc($sql_income_day_q)
+                    ?>
+                    <p class="m-0 fs-2 text-end"><?= $price['price'] ?> บาท</p>
                 </div>
             </div>
             <div class=" p-3 d-flex bg-green-500 w-100 align-items-center justify-content-between">
                 <img src="./public/img/icon/empds2.png" alt="">
                 <div class=" d-flex flex-column lh-1">
                     <p class="m-0 fs-2 text-end">จำนวนงานที่ได้รับวันนี้</p>
-                    <p class="m-0 fs-2 text-end">0 ครั้ง</p>
+                    <?php
+                    $empid = $_SESSION['emp'];
+                    $sql_order_day ="SELECT COUNT(`order`.order_id) AS ordersum
+                    FROM `order`
+                    INNER JOIN orderstatus_detail ON `order`.order_id = orderstatus_detail.order_id
+                    WHERE orderstatus_detail.orderstatus_id = '3' AND `order`.`emp_id` = '1'
+                    GROUP BY `order`.order_id
+                    LIMIT 0, 25;
+                    " ;
+                    $sql_order_day_q = mysqli_query($conn,$sql_order_day);
+                    $order = mysqli_fetch_assoc($sql_order_day_q)
+                    ?>
+                    <p class="m-0 fs-2 text-end"><?= $order['ordersum'] ?> ครั้ง</p>
                 </div>
             </div>
             <div class=" p-3 d-flex bg-red-500 w-100 align-items-center justify-content-between">
