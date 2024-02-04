@@ -17,13 +17,13 @@ if (isset($_POST['additem'])) {
         $sql_select_order_q = mysqli_query($conn, $sql_select_orcer);
         $sql_select_order_fatch = mysqli_fetch_assoc($sql_select_order_q);
         $order_numid = intval($sql_select_order_fatch['order_id']) + 1;
-        $sql_insert_order = "INSERT INTO `orderstatus_detail` VALUE ($order_numid,0)";
+        $sql_insert_order = "INSERT INTO `orderstatus_detail` VALUE ($order_numid,0,null)";
         $sql_insert_order_q = mysqli_query($conn, $sql_insert_order);
         $_SESSION['nowshop'] = $shopid;
         $_SESSION['ordernumber'] = $order_numid;
         $sumitem = intval($itemprice) * intval($quantity);
         $sql_insert_orderdetail = "INSERT INTO `order` 
-        VALUE ('$order_numid','$userid',null,'$shopid','$itemid','$quantity','$detail',null,null,'$sumitem',null,null,null,null,null)";
+        VALUE ('$order_numid','$userid',null,'$shopid','$itemid','$quantity','$detail',null,null,'$sumitem',null,null,null,null,null,null)";
         if (mysqli_query($conn, $sql_insert_orderdetail)) {
             ?>
             <script>
