@@ -8,7 +8,6 @@
         <div class="d-block px-4 mb-2">
             <p class="text-start fs-6 m-0">รายการล่าสุด</p>
         </div>
-<<<<<<< HEAD
         <div class=" h-100 overflow-scroll ">
             <?php
             $empid = $_SESSION['emp'];
@@ -160,13 +159,7 @@
             <?php }
             ?>
 
-=======
-        <div class="h-100 overflow-scroll">
-            <?php
-            $sql_order = "SELECT * FROM `order`";
-            $result = mysqli_query($conn, $sql_order);
->>>>>>> 5e4d0b71dfd338a5a1c363c6b6cdcf3eb4d89ae8
-
+                <?php 
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
