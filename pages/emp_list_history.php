@@ -5,17 +5,30 @@
             <p class=" text-center fs-2 m-0">ประวัติรายการ</p>
         </div>
         <div class=" h-100 overflow-scroll ">
-            <div class=" card mx-4 bg-200 border-0 mb-2">
-                <div class=" card-body d-flex justify-content-between align-items-center">
-                    <div class=" hstack text-center">
-                        <p class=" fs-5 m-0">รหัสการสั่งซื้อ</p>
-                        <span class=" fs-4 fw-light ms-2">001</span>
-                    </div>
-                    <div>
-                        <div class=" bg-yellow-500 p-2" >จัดส่งสำเร็จ</div>
+        <?php
+            $emp_id = $_SESSION['emp'];
+            $sql_list_hisotry = "SELECT `order`.emp_id, `order`.order_id, `orderstatus_detail`.orderstatus_id, order_status.orderstatus_id, order_status.orderstatus_name FROM `order` INNER JOIN orderstatus_detail ON `order`.order_id = `orderstatus_detail`.order_id INNER JOIN order_status ON `orderstatus_detail`.orderstatus_id = order_status.orderstatus_id 
+            WHERE `order`.emp_id = '$emp_id' 
+            
+            GROUP BY `order`.emp_id, `order`.order_id, `orderstatus_detail`.orderstatus_id, order_status.orderstatus_id;";
+            
+            $sql_fetch_list = mysqli_query($conn, $sql_list_hisotry);
+            while ($data = mysqli_fetch_assoc($sql_fetch_list)) { ?>
+                <div class=" card mx-4 bg-200 border-0 mb-2">
+                    <div class=" card-body d-flex justify-content-between align-items-center">
+                        <div class=" hstack text-center">
+                            <p class=" fs-5 m-0">รหัสการสั่งซื้อ</p>
+                            <span class=" fs-4 fw-light ms-2"><?= $data['order_id'] ?></span>
+                        </div>
+                        <div>
+                            <div class="  <?= $data['orderstatus_id'] == 9 ? 'bg-red-500':'bg-yellow-500' ?> p-2">
+                                <?= $data['orderstatus_name'] ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php }
+            ?>
             
 
         </div>

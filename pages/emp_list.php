@@ -14,13 +14,12 @@
             $sql_list_order = "SELECT `order`.order_id, `order`.cus_id, orderstatus_id
             FROM `orderstatus_detail`
             INNER JOIN `order` ON orderstatus_detail.order_id = `order`.order_id
-            WHERE orderstatus_id BETWEEN 1 AND 3 AND emp_id = '$empid'
+            WHERE orderstatus_id BETWEEN 1 AND 2 AND emp_id = '$empid'
             GROUP BY `order`.order_id
             LIMIT 0, 25;";
             $sql_list_order_q = mysqli_query($conn, $sql_list_order);
             $sql_list_order_fatch = mysqli_fetch_assoc($sql_list_order_q);
             ?>
-            <?=  $sql_list_order ?>
             <?php
             if ($sql_list_order_fatch) {
                 ?>
@@ -54,7 +53,7 @@
                                                 </div>
                                                 <hr class=" border-2 w-100 mt-4">
                                                 <div class=" d-flex flex-column justify-content-center">
-                                                    <div class="mx-auto <?=  $sql_list_order_fatch['orderstatus_id'] == 2 || $sql_list_order_fatch['orderstatus_id'] == 3 ? 'bg-yellow-500' : 'bg-500' ?> fs-4 rounded-circle d-flex justify-content-center align-items-center"
+                                                    <div class="mx-auto <?= $sql_list_order_fatch['orderstatus_id'] == 2 || $sql_list_order_fatch['orderstatus_id'] == 3 ? 'bg-yellow-500' : 'bg-500' ?> fs-4 rounded-circle d-flex justify-content-center align-items-center"
                                                         style=" width: 50px; height: 50px;">
                                                         2
                                                     </div>
@@ -73,8 +72,9 @@
                                                 <?php
                                                 $orderid = $sql_list_order_fatch['order_id'];
                                                 $sql_order = "SELECT * FROM `order`
-                                            INNER JOIN `item`
-                                            ON `order`.item_id = item.item_id ";
+                                                INNER JOIN `item` ON `order`.item_id = item.item_id
+                                                INNER JOIN  `orderstatus_detail` ON `order`.order_id = `orderstatus_detail`.order_id
+                                                WHERE emp_id = '$empid' AND orderstatus_detail.orderstatus_id BETWEEN 1 AND 2 AND `order`.order_id='$orderid'";
                                                 $sql_order_q = mysqli_query($conn, $sql_order);
 
                                                 ?>
@@ -112,6 +112,7 @@
                                                 <div class=" d-flex justify-content-between">
                                                     <button class=" btn btn-500 rounded-0" data-bs-dismiss="modal">
                                                         Back</button>
+                                                    <a class=" btn btn-green-500 rounded-0">ไปยังหน้าคำสั่ง</a>
                                                     <button class=" btn btn-red-500 rounded-0" data-bs-toggle="modal"
                                                         data-bs-target="#calorder"> ยกเลิก</button>
 
@@ -151,34 +152,11 @@
                         </div>
                     </div>
                 </div>
-            <?php
-            } else {?>
-                 <div class=" bg-red-100 rounded-3 text-center text-red-500 fs-4 m-2  py-5">ยังไม่ได้รับคำสั่งซื้อ
-                    
+                <?php
+            } else { ?>
+                <div class=" bg-red-100 rounded-3 text-center text-red-500 fs-4 m-2  py-5">ยังไม่ได้รับคำสั่งซื้อ
                 </div>
             <?php }
-            ?>
-
-                <?php 
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-            ?>
-                    <div class="card mx-4 bg-200 border-0 mb-2">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div class="vstack text-center">
-                                <p class="fs-5 m-0">รหัสคำสั่งซื้อ</p>
-                                <span class="fs-4 fw-light"><?= $row['order_id'] ?></span>
-                            </div>
-                            <div>
-                                <button class="btn btn-yellow-500" data-bs-toggle="modal" data-bs-target="#list">ดูสถานะคำสั่งซื้อ</button>
-                            </div>
-                        </div>
-                    </div>
-            <?php
-                }
-            } else {
-                echo '<p>ตอนนี้ยังไม่มีรายการอาหาร</p>';
-            }
             ?>
         </div>
     </div>
