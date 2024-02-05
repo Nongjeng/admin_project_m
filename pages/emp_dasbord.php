@@ -14,11 +14,11 @@
                     FROM `order`
                     INNER JOIN distance_price ON `order`.disprice_id = distance_price.disprice_id
                     WHERE STR_TO_DATE(order_date, '%d/%m/%Y') = CURDATE() AND emp_id = '$empid'
-                    LIMIT 0, 25;" ;
+                    LIMIT 0, 1;" ;
                     $sql_income_day_q = mysqli_query($conn,$sql_income_day);
                     $price = mysqli_fetch_assoc($sql_income_day_q)
                     ?>
-                    <p class="m-0 fs-2 text-end"><?= $price['price'] ?> บาท</p>
+                    <p class="m-0 fs-2 text-end"><?= $price['price'] ? $price['price'] : 0 ?> บาท</p>
                 </div>
             </div>
             <div class=" p-3 d-flex bg-green-500 w-100 align-items-center justify-content-between">
@@ -30,14 +30,14 @@
                     $sql_order_day ="SELECT COUNT(`order`.order_id) AS ordersum
                     FROM `order`
                     INNER JOIN orderstatus_detail ON `order`.order_id = orderstatus_detail.order_id
-                    WHERE orderstatus_detail.orderstatus_id = '3' AND `order`.`emp_id` = '1'
+                    WHERE orderstatus_detail.orderstatus_id = '3' AND `order`.`emp_id` = '$empid'
                     GROUP BY `order`.order_id
-                    LIMIT 0, 25;
+                    LIMIT 0, 1;
                     " ;
                     $sql_order_day_q = mysqli_query($conn,$sql_order_day);
                     $order = mysqli_fetch_assoc($sql_order_day_q)
                     ?>
-                    <p class="m-0 fs-2 text-end"><?= $order['ordersum'] ?> ครั้ง</p>
+                    <p class="m-0 fs-2 text-end"><?= $order['ordersum'] ? $order['ordersum']:'0' ?> ครั้ง</p>
                 </div>
             </div>
             <div class=" p-3 d-flex bg-red-500 w-100 align-items-center justify-content-between">
