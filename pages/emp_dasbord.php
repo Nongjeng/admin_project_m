@@ -55,8 +55,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <a class=" btn btn-yellow-500 rounded-3 text-black text-decoration-none w-100 mb-1">รายได้ </a>
-                                    <a class=" btn btn-green-500 rounded-3 text-black text-decoration-none w-100">จำนวนงาน </a>
+                                    <a class=" btn btn-yellow-500 rounded-3 text-black text-decoration-none w-100 mb-1" href="?page=emp_incom_setting">รายได้ </a>
+                                    <a class=" btn btn-green-500 rounded-3 text-black text-decoration-none w-100" href="?page=emp_work_setting">จำนวนงาน </a>
                                 </div>
                             </div>
                         </div>
