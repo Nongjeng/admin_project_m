@@ -22,14 +22,32 @@
                 </div>
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">เบอร์โทร</p>
-                    <input type="text" name="phone" id=""
+                    <input type="text" name="tell"
+                        value="<?php echo isset($emp_data['tell']) ? $emp_data['tell'] : ''; ?>" disabled
                         class=" form-control border-top-0 border-end-0 border-start-0 border-2 rounded-0 border-dark" >
                 </div>
-                <div class=" hstack gap-3 my-2">
-                    <p class=" fw-medium m-0 text-nowrap">แผนกวิชา</p>
-                      
-                    </select>
-                </div>
+<div class="hstack gap-3 my-2">
+    <p class="fw-medium m-0 text-nowrap">แผนกวิชา</p>
+    <select name="dep_id" class="form-control">
+        <?php
+
+        $sql_department = "SELECT * FROM `department`";
+        $result_department = mysqli_query($conn, $sql_department);
+
+        if (mysqli_num_rows($result_department) > 0) {
+            while ($row_department = mysqli_fetch_assoc($result_department)) {
+                $dep_id = $row_department['dep_id'];
+                $dep_name = $row_department['dep_name'];
+
+                $selected = ($dep_id == $employee['dep_id']) ? 'selected' : '';
+
+                echo "<option value='$dep_id' $selected>$dep_name</option>";
+            }
+        }
+        ?>
+    </select>
+</div>
+
                 <div class=" hstack gap-3 my-2">
                     <p class=" fw-medium m-0 text-nowrap">สถานะ</p>
                     <!-- <select class="form-select shadow-none" name="statuslevel">
