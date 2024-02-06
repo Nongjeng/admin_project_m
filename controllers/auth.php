@@ -4,18 +4,25 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
     $sqluser = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
     $sqlemp = "SELECT * FROM employee WHERE username='$username' AND password='$password'";
+    $sqlad = "SELECT * FROM admin WHERE username='$username' AND password='$password'";
     $sql_user = mysqli_query($conn, $sqluser);
     $sql_emp = mysqli_query($conn, $sqlemp);
+    $sql_ad = mysqli_query($conn, $sqlad);
     $user_data = mysqli_fetch_assoc($sql_user);
     $emp_data = mysqli_fetch_assoc($sql_emp);
+    $ad_data = mysqli_fetch_assoc($sql_ad);
+
     if ($user_data) {
         $_SESSION['user'] = $user_data['cus_id'];
         header("Location:?page=home&id=" . $user_data['cus_id']);
     } elseif ($emp_data) {
         $_SESSION['emp'] = $emp_data['emp_id'];
         header("Location:?page=emp_dasbord&id=" . $emp_data['emp_id']);
+    } elseif ($ad_data) {
+        $_SESSION['ad'] = $ad_data['admin_id'];
+        header("Location:?page=ad_customer&id=" . $ad_data['admin_id']);
     } else {
-        ?>
+?>
         <script>
             Swal.fire({
                 icon: 'error',
@@ -24,7 +31,7 @@ if (isset($_POST['login'])) {
                 text: 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง',
             })
         </script>
-        <?php
+    <?php
     }
 }
 if (isset($_POST['register_customer'])) {
@@ -37,7 +44,7 @@ if (isset($_POST['register_customer'])) {
     $password = $_POST['password'];
     $sql_chack_user = "SELECT username FROM customer WHERE username='$username'";
     if (mysqli_num_rows(mysqli_query($conn, $sql_chack_user)) > 0) {
-        ?>
+    ?>
         <script>
             Swal.fire({
                 icon: 'error',
@@ -55,7 +62,7 @@ if (isset($_POST['register_customer'])) {
             $sql_user_insert = "INSERT INTO customer VALUE 
                 (null,'$name','$perfix','$statuslevel','$phone','$department','$username','$password','$userimg')";
             if (mysqli_query($conn, $sql_user_insert)) {
-                ?>
+        ?>
                 <script>
                     Swal.fire({
                         icon: 'success',
@@ -64,10 +71,10 @@ if (isset($_POST['register_customer'])) {
                         text: 'ระบบกำลังนำไปยัง หน้า Login',
                     })
                 </script>
-                <?php
+            <?php
                 header("Location:?page=login");
             } else {
-                ?>
+            ?>
                 <script>
                     Swal.fire({
                         icon: 'error',
@@ -76,13 +83,13 @@ if (isset($_POST['register_customer'])) {
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
                 </script>
-                <?php
+            <?php
             }
         } else {
             $sql_user_insert = "INSERT INTO customer VALUE 
                 (null,'$name','$perfix','$statuslevel','$phone','$department','$username','$password','user.jpg')";
             if (mysqli_query($conn, $sql_user_insert)) {
-                ?>
+            ?>
                 <script>
                     Swal.fire({
                         icon: 'success',
@@ -91,10 +98,10 @@ if (isset($_POST['register_customer'])) {
                         text: 'ระบบกำลังนำไปยัง หน้า Login',
                     })
                 </script>
-                <?php
+            <?php
                 header("Location:?page=login");
             } else {
-                ?>
+            ?>
                 <script>
                     Swal.fire({
                         icon: 'error',
@@ -103,13 +110,10 @@ if (isset($_POST['register_customer'])) {
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
                 </script>
-                <?php
+        <?php
             }
         }
-
-
     }
-
 }
 if (isset($_POST['register_employee'])) {
     $perfix = $_POST['perfix'];
@@ -131,11 +135,11 @@ if (isset($_POST['register_employee'])) {
                 text: 'โปรดทำการอัพโหลดตรางเรียน / ตรางสอน',
             })
         </script>
-        <?php
+    <?php
     }
     $sql_chack_user = "SELECT username FROM employee WHERE username='$username'";
     if (mysqli_num_rows(mysqli_query($conn, $sql_chack_user)) > 0) {
-        ?>
+    ?>
         <script>
             Swal.fire({
                 icon: 'error',
@@ -154,7 +158,7 @@ if (isset($_POST['register_employee'])) {
             $sql_emp_insert = "INSERT INTO employee VALUE 
             (null,'$name','$perfix','$statuslevel','$phone','$department','$username','$password','$fileisupload_table','$fileisupload');";
             if (mysqli_query($conn, $sql_emp_insert)) {
-                ?>
+        ?>
                 <script>
                     Swal.fire({
                         icon: 'success',
@@ -163,10 +167,10 @@ if (isset($_POST['register_employee'])) {
                         text: 'ระบบกำลังนำไปยัง หน้า Login',
                     })
                 </script>
-                <?php
+            <?php
                 header("Location:?page=login");
             } else {
-                ?>
+            ?>
                 <script>
                     Swal.fire({
                         icon: 'error',
@@ -175,13 +179,13 @@ if (isset($_POST['register_employee'])) {
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
                 </script>
-                <?php
+            <?php
             }
         } else {
             $sql_emp_insert = "INSERT INTO employee VALUE 
             (null,'$name','$perfix','$statuslevel','$phone','$department','$username','$password','$fileisupload_table','user.jpg');";
             if (mysqli_query($conn, $sql_emp_insert)) {
-                ?>
+            ?>
                 <script>
                     Swal.fire({
                         icon: 'success',
@@ -190,10 +194,10 @@ if (isset($_POST['register_employee'])) {
                         text: 'ระบบกำลังนำไปยัง หน้า Login',
                     })
                 </script>
-                <?php
+            <?php
                 header("Location:?page=login");
             } else {
-                ?>
+            ?>
                 <script>
                     Swal.fire({
                         icon: 'error',
@@ -202,7 +206,7 @@ if (isset($_POST['register_employee'])) {
                         text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     })
                 </script>
-                <?php
+<?php
             }
         }
     }
